@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="span4">
+    <div class="thumbnail">
+      <img src="<%= @picture %>" style="float: left;margin: 5px;">
+      <h4><%= @profile["name"] %></h4>
+      <h4><%= @profile["location"]["name"] %></h4>
+      <p>Work @<%= @profile["work"][0]["employer"]["name"] %> as <%= @profile["work"][0]["position"]["name"] %></p>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 16px;width: 1000px;">
+  <div class="span5">
+	<h1>Feeds</h1>
+  	<table class="table table-striped">
+  	  <tr>
+  	  	<th>Story</th>
+  	  	<th>Story tags</th>
+  	  </tr>
+  		<% @feed.each do |f| %>
+	  	  <tr>
+	  	  	<td><%= f["story"] %></td>
+	  	  	<td><%= f["story_tags"]["19"][0]["name"] %></td>
+	  	  </tr>
+  	  <% end %>
+  	  <% feed_next_page = @feed.next_page %>
+  	  <% feed_next_page.each do |f| %>
+	  	  <tr>
+	  	  	<td><%= f["story"] %></td>
+	  	  	<td><%= f["story_tags"]["19"][0]["name"] if f["story_tags"]["19"] %></td>
+	  	  </tr>
+  	  <% end %>
+  	  <% feed_next_page = @feed.next_page %>
+  	  <% feed_next_page.each do |f| %>
+	  	  <tr>
+	  	  	<td><%= f["story"] %></td>
+	  	  	<td><%= f["story_tags"]["19"][0]["name"] if f["story_tags"]["19"] %></td>
+	  	  </tr>
+  	  <% end %>
+	</table>
+  </div>
+	<div class="span5">
+	<h1>Friends</h1>
+  	<table class="table table-striped">
+  	  <tr>
+  	  	<th>Name</th>
+  	  </tr>
+  		<% @friends.each do |f| %>
+	  	  <tr>
+	  	  	<td><a href="http://facebook.com/<%= f["id"] %>"><%= f["name"] %></a></td>
+	  	  </tr>
+  	  <% end %>
+	</table>
+  </div>
+</div>
